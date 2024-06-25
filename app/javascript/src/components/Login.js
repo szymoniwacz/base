@@ -25,7 +25,7 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const successMessage = location.state?.message;
+  const successMessage = new URLSearchParams(location.search).get('notice');
 
   useEffect(() => {
     if (successMessage) {

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  class RegisterUser < Mutations::BaseMutation
+  class RegisterUser < BaseMutation
     argument :email, String, required: true
     argument :password, String, required: true
     argument :password_confirmation, String, required: true
@@ -12,6 +12,7 @@ module Mutations
     def resolve(email:, password:, password_confirmation:)
       user = User.new(email: email, password: password, password_confirmation: password_confirmation)
       if user.save
+        user.send_confirmation_instructions
         { user: user, errors: [] }
       else
         { user: nil, errors: user.errors.full_messages }
