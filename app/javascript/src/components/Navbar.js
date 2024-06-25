@@ -10,17 +10,17 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <Link className="navbar-brand" to="/">MyApp</Link>
+        <Link className="navbar-brand" to="/">Base</Link>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav me-auto">
+            {!isAuthenticated && location.pathname !== '/' && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/">Login</Link>
+              </li>
+            )}
             {!isAuthenticated && location.pathname === '/' && (
               <li className="nav-item">
                 <Link className="nav-link" to="/register">Register</Link>
-              </li>
-            )}
-            {!isAuthenticated && location.pathname === '/register' && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/">Login</Link>
               </li>
             )}
             {isAuthenticated && (
